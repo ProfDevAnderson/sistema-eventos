@@ -1,5 +1,7 @@
 package br.com.eventos.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 // Representar uma Entidade de um BD
@@ -14,6 +16,7 @@ public class Evento {
     private String nome;
     @Column(nullable = false)
     private String descricao;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date data;
     private Double valor;

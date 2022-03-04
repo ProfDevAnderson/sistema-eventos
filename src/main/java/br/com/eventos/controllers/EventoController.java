@@ -5,6 +5,7 @@ import br.com.eventos.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -21,18 +22,44 @@ public class EventoController {
         return "evento/index";
     }
 
-    @GetMapping("/todos/eventos")
+    @GetMapping("/eventos")
     public ModelAndView verTodosEventos(){
 //         lISTA DE EVENTOS
         List<Evento> listaEventos = new ArrayList<>();
-
         listaEventos = eventoRepository.findAll();
-
         ModelAndView mv = new ModelAndView("evento/eventos");
         mv.addObject("listaEventos", listaEventos );
-
         return mv;
     }
+
+    @GetMapping("/eventos/novo")
+    public String cadastar(){
+        return "evento/cadastro";
+    }
+
+    @PostMapping("/eventos/cadastrar")
+    public String cadastrarEvento(Evento evento){
+
+        eventoRepository.save(evento);
+
+        return "redirect:/eventos";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //    @GetMapping("/todos/eventos")
