@@ -42,6 +42,9 @@
             <td th:text="${evento.nome}"></td>
             <td th:text="${evento.descricao}"></td>
             <td th:text="${evento.status}"></td>
+            <td>
+                <a th:href="@{/eventos/{id} (id=${evento.id}) }">Ver Detalhes</a>
+            </td>
         </tr>
         </tbody>
     </table>

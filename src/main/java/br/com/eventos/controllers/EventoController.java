@@ -5,11 +5,13 @@ import br.com.eventos.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EventoController {
@@ -43,6 +45,21 @@ public class EventoController {
         eventoRepository.save(evento);
 
         return "redirect:/eventos";
+    }
+
+    @GetMapping("/eventos/{id}")
+    public ModelAndView detalhes(@PathVariable Long id){
+        Optional<Evento> evento = eventoRepository.findById(id);
+
+        if (evento.isPresent()) {
+            ModelAndView mv = new ModelAndView("evento/detalhes");
+            mv.addObject("evento", evento.get() );
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/eventos");
+        }
+
+
     }
 
 
