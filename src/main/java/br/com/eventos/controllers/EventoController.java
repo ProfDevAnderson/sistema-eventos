@@ -58,9 +58,16 @@ public class EventoController {
         } else {
             return new ModelAndView("redirect:/eventos");
         }
+    }
 
+    @GetMapping("/eventos/deletar/{id}")
+    public String deletar(@PathVariable Long id){
+
+        eventoRepository.deleteById(id);
+        return "redirect:/eventos";
 
     }
+
 
 
 
